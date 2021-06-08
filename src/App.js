@@ -1,24 +1,30 @@
-import logo from './logo.svg';
+
 import './App.css';
+import { Fragment } from 'react';
+import Home from './Components/Home/Home.jsx';
+import Navbar from './Components/Navbar/Navbar.jsx';
+import Register from './Components/Register/Register.jsx';
+import Login from './Components/Login/Login.jsx';
+import { Route, Switch,Redirect } from 'react-router';
+import ProtectedRoutes from './Components/ProtectedRoutes/ProtectedRoutes';
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+<Fragment>
+  <Navbar/>
+  
+  <Switch>
+    <Route path="/login" component={Login}/>
+    <Route path="/register" component={Register}/>
+    <ProtectedRoutes  path="/home" component={Home}/>
+    {/* <Route path="/home" component={Home}/> */}
+    <Redirect exact from="/" to="/login"/>
+    <Route path="*" component={Login}/>
+  </Switch>
+  
+</Fragment>
   );
 }
 
